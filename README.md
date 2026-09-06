@@ -1,51 +1,62 @@
-rvey-and-Feedback-Management-System'
-hint: Updates were rejected because the remote contains work that you do not
-hint: have locally. This is usually caused by another repository pushing to
-hint: the same ref. If you want to integrate the remote changes, use
-hint: 'git pull' before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+# Student Survey & Feedback Management System
 
-E:\Nishant\Student-Survey-Feddback-Management-System-main\Student-Survey-Feddback-Management-System-main>git pull
-remote: Enumerating objects: 3, done.
-remote: Counting objects: 100% (3/3), done.
-remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
-Unpacking objects: 100% (3/3), 896 bytes | 224.00 KiB/s, done.
-From https://github.com/Nishant269/Student-Survey-and-Feedback-Management-System
- * [new branch]      main       -> origin/main
-There is no tracking information for the current branch.
-Please specify which branch you want to merge with.
-See git-pull(1) for details.
+A role-based Java web application designed to manage student feedback, surveys, and video assignments. The system features distinct dashboards and permissions for Students, Faculty, Mentors, Heads of Department (HODs), and Administrators.
 
-    git pull <remote> <branch>
+## 🚀 Features
+* **Role-Based Access Control:** Secure logins tailored for Admin, HOD, Faculty, Mentor, Student, and Alumni.
+* **Survey Management:** Push customized surveys to specific departments or years, and view real-time analytics and score breakdowns.
+* **Video Assignments:** Request, upload, and review video submissions with approval workflows.
+* **Bulk Data Upload:** Admins can bulk-import user data (Students, Faculty, etc.) via `.xlsx` Excel files.
+* **Cloud Ready:** Fully configured for deployment via Docker and Render, utilizing secure environment variables for cloud database connections.
 
-If you wish to set tracking information for this branch you can do so with:
+---
 
-    git branch --set-upstream-to=origin/<branch> main
+## 🛠️ Prerequisites
 
+To run this project locally, you will need:
+* **Java Development Kit (JDK) 17**
+* **Apache Tomcat 10.x**
+* **MySQL** (Local server or Cloud database like Aiven)
+* **Eclipse IDE for Enterprise Java** (or IntelliJ IDEA)
+* **Maven** (for dependency management)
 
-E:\Nishant\Student-Survey-Feddback-Management-System-main\Student-Survey-Feddback-Management-System-main>
+---
 
-E:\Nishant\Student-Survey-Feddback-Management-System-main\Student-Survey-Feddback-Management-System-main>git pull origin main --allow-unrelated-histories
-From https://github.com/Nishant269/Student-Survey-and-Feedback-Management-System
- * branch            main       -> FETCH_HEAD
-Merge made by the 'ort' strategy.
- README.md | 1 +
- 1 file changed, 1 insertion(+)
- create mode 100644 README.md
+## 🔐 Environment Variables Configuration
 
-E:\Nishant\Student-Survey-Feddback-Management-System-main\Student-Survey-Feddback-Management-System-main>git branch --set-upstream-to=origin/main main
-branch 'main' set up to track 'origin/main'.
+For security, this application does not hardcode database credentials. You **must** set up the following environment variables before running the application locally or in the cloud.
 
-E:\Nishant\Student-Survey-Feddback-Management-System-main\Student-Survey-Feddback-Management-System-main>git push -u origin main
-Enumerating objects: 47, done.
-Counting objects: 100% (47/47), done.
-Delta compression using up to 12 threads
-Compressing objects: 100% (39/39), done.
-Writing objects: 100% (46/46), 50.29 KiB | 4.57 MiB/s, done.
-Total 46 (delta 21), reused 0 (delta 0), pack-reused 0
-remote: Resolving deltas: 100% (21/21), done.
-To https://github.com/Nishant269/Student-Survey-and-Feedback-Management-System
-   7dca2f4..e8f336d  main -> main
-branch 'main' set up to track 'origin/main'.
+### Required Variables
+| Variable Name | Description | Example Value |
+| :--- | :--- | :--- |
+| `DB_URL` | The JDBC connection string to your MySQL database. | `jdbc:mysql://localhost:3306/my_login_app?ssl-mode=REQUIRED` (Local) <br> *or* <br> `jdbc:mysql://avnadmin:xyz@your-aiven-host:27506/my_login_app?ssl-mode=REQUIRED` (Cloud) |
+| `DB_USER` | Your MySQL username. | `root` or `avnadmin` |
+| `DB_PASSWORD` | Your MySQL password. | `your_secure_password` |
 
-E:\Nishant\Student-Survey-Feddback-Management-System-main\Student-Survey-Feddback-Management-System-main>
+### How to set them locally (Windows & Eclipse)
+
+**Method 1: Windows System Variables (Global)**
+1. Press the Windows key, type **Environment Variables**, and select **Edit the system environment variables**.
+2. Click the **Environment Variables...** button at the bottom.
+3. Under **System variables**, click **New...**.
+4. Add the `Variable name` (e.g., `DB_URL`) and `Variable value`. Repeat for all three variables.
+5. Click **OK** to save. 
+6. **CRITICAL:** You must completely restart Eclipse and your command prompt for Windows to pass these new variables to your apps.
+
+**Method 2: Eclipse Tomcat Configuration (Recommended)**
+If Eclipse is failing to read your Windows system variables, you can inject them directly into Tomcat:
+1. In Eclipse, go to the **Servers** tab.
+2. Double-click your **Tomcat v10.0 Server**.
+3. Click the **Open launch configuration** link.
+4. Navigate to the **Environment** tab.
+5. Click **Add...** and input your `DB_URL`, `DB_USER`, and `DB_PASSWORD` key-value pairs here.
+6. Click **Apply and Close**.
+
+---
+
+## 💻 Local Setup & Running the Project
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+   cd your-repo-name
