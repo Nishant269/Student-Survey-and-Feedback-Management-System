@@ -1,0 +1,14 @@
+# Eclipse specific files
+.settings/
+.classpath
+.project
+
+# Build and target outputs
+target/
+build/
+bin/
+*.class
+
+# Tomcat temporary files
+wtpwebapps/
+.metadata/

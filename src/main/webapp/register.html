@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen py-10">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
+        <h1 class="text-2xl font-bold mb-6 text-center text-gray-700">Create Account</h1>
+        
+        <form action="register" method="post">
+            
+            <!-- ROLE SELECTION -->
+            <div class="mb-4">
+                <label for="role_id" class="block text-gray-600 mb-2">I am a:</label>
+                <!-- Added onchange event here -->
+                <select id="role_id" name="role_id" class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white" required onchange="handleRoleChange()">
+                    <option value="" disabled selected>Select Role</option>
+                    <option value="1">Admin</option>
+                    <option value="4">Faculty</option>
+                   
+                    <option value="2">Student</option>
+                    <option value="5">Alumni</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="name" class="block text-gray-600 mb-2">Full Name</label>
+                <input type="text" id="name" name="name" class="w-full px-3 py-2 border border-gray-300 rounded-md" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="roll_number" class="block text-gray-600 mb-2">Roll Number / Employee ID</label>
+                <input type="text" id="roll_number" name="roll_number" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+            </div>
+
+            <!-- DEPARTMENT CONTAINER (Added ID: dept_container) -->
+            <div class="mb-4" id="dept_container">
+                <label for="department" class="block text-gray-600 mb-2">Department</label>
+                <select id="department" name="department" class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white" required>
+                    <option value="" disabled selected>Select Department</option>
+                    <option value="CSE">CSE</option>
+                    <option value="IT">IT</option>
+                    <option value="CIVIL">CIVIL</option>
+                    <option value="MECHANICAL">MECHANICAL</option>
+                    <option value="ELECTRICAL">ELECTRICAL</option>
+                    <option value="ECE">ECE</option>
+                    <option value="CYBER SECURITY">CYBER SECURITY</option>
+                </select>
+            </div>
+
+            <!-- YEAR CONTAINER (Added ID: year_container) -->
+            <div class="mb-4" id="year_container">
+                <label for="year" class="block text-gray-600 mb-2">Year</label>
+                <select id="year" name="year" class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white" required>
+                    <option value="" disabled selected>Select Year</option>
+                    <option value="1st">1st Year</option>
+                    <option value="2nd">2nd Year</option>
+                    <option value="3rd">3rd Year</option>
+                    <option value="4th">4th Year</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="username" class="block text-gray-600 mb-2">Username (UID)</label>
+                <input type="text" id="username" name="username" class="w-full px-3 py-2 border border-gray-300 rounded-md" required>
+            </div>
+
+            <div class="mb-6">
+                <label for="password" class="block text-gray-600 mb-2">Password</label>
+                <input type="password" id="password" name="password" class="w-full px-3 py-2 border border-gray-300 rounded-md" required>
+            </div>
+            
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition">Register</button>
+        
+            <p class="text-center mt-4 text-sm">
+                Already have an account? 
+                <a href="login.html" class="text-blue-500 hover:underline">Login here</a>
+            </p>
+        </form>
+    </div>
+
+    <!-- 2. ADD THE JAVASCRIPT LOGIC HERE -->
+    <script>
+        function handleRoleChange() {
+            // Get the selected role value
+            const roleId = document.getElementById("role_id").value;
+            
+            // Get the container elements
+            const deptContainer = document.getElementById("dept_container");
+            const yearContainer = document.getElementById("year_container");
+            
+            // Get the input elements to manage the 'required' attribute
+            const deptInput = document.getElementById("department");
+            const yearInput = document.getElementById("year");
+
+            // Reset visibility and required status by default
+            deptContainer.style.display = "block";
+            deptInput.required = true;
+            
+            yearContainer.style.display = "block";
+            yearInput.required = true;
+
+            // Apply Logic Based on Selection
+            if (roleId === "1") { 
+                // ADMIN: Hide Dept and Year
+                deptContainer.style.display = "none";
+                deptInput.required = false;
+                deptInput.value = ""; // Clear value
+                
+                yearContainer.style.display = "none";
+                yearInput.required = false;
+                yearInput.value = ""; // Clear value
+                
+            } else if (roleId === "4") { 
+                // FACULTY: Show Dept, Hide Year
+                yearContainer.style.display = "none";
+                yearInput.required = false;
+                yearInput.value = ""; // Clear value
+                
+            } else if (roleId === "5") { 
+                // ALUMNI: Show Dept, Hide Year
+                yearContainer.style.display = "none";
+                yearInput.required = false;
+                yearInput.value = ""; // Clear value
+            }
+            // For Mentor (3) and Student (2), the defaults (both shown) apply.
+        }
+
+        // Call it once on page load just in case the browser remembers a selection
+        window.onload = handleRoleChange;
+    </script>
+</body>
+</html>
